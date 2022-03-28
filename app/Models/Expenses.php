@@ -7,5 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class Expenses extends Model
 {
+    public $timestamps = false;
     protected $fillable = ['description', 'user_name', 'transaction_at', 'value'];
 }

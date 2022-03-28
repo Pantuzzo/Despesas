@@ -72,11 +72,10 @@ export default {
       this.today = dataAtual.toString();
     },
     retrieveLists() {
-      var self = this;
       ListsDataService.getAll()
       .then(response => {
         var expenses = response.data;
-        self.expenses = expenses;
+        this.expenses = expenses;
       }).catch(e => {
         console.log(e);
       });
@@ -88,10 +87,10 @@ export default {
       });
     },
     save() {
-      var self = this;
       if(this.expense.transaction_at <= this.today){
         if(!this.expense.id){
-          ListsDataService.create(self.expense).then(response => {
+          ListsDataService.create(this.expense).then(response => {
+            console.log(this.expense);
             this.expense = {};
             alert("Despesa Salva com sucesso!");
             this.refresh();
@@ -99,7 +98,9 @@ export default {
             console.log(e);
           });
         }else{
-            ListsDataService.update(self.expense.id, self.expense).then(response => {
+            ListsDataService.update(this.expense.id, this.expense).then(response => {
+              console.log(this.expense);
+            console.log(this.expense);
             this.expense = {};
             alert("Despesa Atualizada! com sucesso!");
             this.refresh();
@@ -131,9 +132,6 @@ export default {
     this.dataToday();
     this.retrieveLists();
     this.refresh();
-  },
-  created(){
-    this.mascaraValor();
   }
 }
 </script>

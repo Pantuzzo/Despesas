@@ -39,12 +39,13 @@ class ExpensesController extends Controller
 
     public function updateExpense(Request $request, $id){
         if (Expenses::where('id', $id)->exists()) {
+            
             $expense = Expenses::find($id);
+            print_r($expense);exit;
             $expense->description = is_null($request->description) ? $expense->description : $request->description;
             $expense->transaction_at = is_null($request->transaction_at) ? $expense->transaction_at : $request->transaction_at;
             $expense->user_name = is_null($request->user_name) ? $expense->user_name : $request->user_name;
             $expense->value = is_null($request->value) ? $expense->value : $request->value;
-    
             return response()->json([
                 "message" => "records updated successfully"
             ], 200);
